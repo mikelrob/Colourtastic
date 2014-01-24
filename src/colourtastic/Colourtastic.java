@@ -15,6 +15,6 @@ public class Colourtastic {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        System.out.println("Colourtastic!");
+        System.out.println("Colourtastic! A game of perception");
     }
 }
