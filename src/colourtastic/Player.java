@@ -1,15 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package colourtastic;
+
+import java.awt.Color;
 
 /**
  *
  * @author Conor
  */
-public class Player {
-    
+public class Player extends GameObject{
+    public Player(){
+        posX = posY = 0;
+        sizeX = sizeY = 50;
+        color = Color.YELLOW;
+    }
 }
