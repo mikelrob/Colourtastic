@@ -42,6 +42,7 @@ public class GameView extends JPanel implements ActionListener, KeyListener{
         g.fillRect(100, 100, 100, 100);
         
         //draw player
+        g.setColor(me.getColor());
         g.fillRect(me.getPositionX(), me.getPositionY(), me.getSizeX(), me.getSizeY());
     }
 
