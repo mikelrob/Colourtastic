@@ -16,19 +16,19 @@ import javax.swing.JPanel;
 public class GameView extends JPanel implements ActionListener, KeyListener{
     
     //framerate ivars
-    int fps = 24;
+    int fps = 30;
     int delay = 1000/fps;
     
     //actor ivars
-    Player me;
+    Player2 me;
     
     public GameView(){
         Timer gameTimer = new Timer(delay, this);
         gameTimer.start();
         setFocusable(true);
         addKeyListener(this);
-        
-        me = new Player();
+        LevelManager.loadLevel(1);
+        me = new Player2();
     }
     
     /**
@@ -42,8 +42,9 @@ public class GameView extends JPanel implements ActionListener, KeyListener{
         g.fillRect(0, 0, getWidth(), getHeight());
         
         //draw player
-        g.setColor(me.getColor());
-        g.fillRect(me.getPositionX(), me.getPositionY(), me.getSizeX(), me.getSizeY());
+        me.Draw(g);
+        
+        LevelManager.Draw(g);
     }
 
     /**
@@ -55,7 +56,7 @@ public class GameView extends JPanel implements ActionListener, KeyListener{
     public void actionPerformed(ActionEvent ae) {
 //        System.out.println(ae.getID());
 //        System.out.println(System.currentTimeMillis());
-        me.update();
+        me.Update();
         this.repaint();
     }
 
@@ -70,17 +71,19 @@ public class GameView extends JPanel implements ActionListener, KeyListener{
         int c = ke.getKeyCode();
         switch(c){
             case KeyEvent.VK_LEFT:
-                System.out.println("Left");
-                me.setSpeedX(-10);
+                //System.out.println("Left");
+                me.moveLeft(true);
                 break;
             case KeyEvent.VK_RIGHT:
-                System.out.println("Right");
-                me.setSpeedX(10);
+                //System.out.println("Right");
+                me.moveRight(true);
 //                me.setPositionX(me.getPositionX() + 10);
                 break;
             case KeyEvent.VK_UP:
-                System.out.println("Up");
                 me.jump();
+                break;
+            case KeyEvent.VK_SPACE:
+                me.respawn();
                 break;
             default:
                 System.out.println("Key not implemented");
@@ -92,15 +95,26 @@ public class GameView extends JPanel implements ActionListener, KeyListener{
         int c = ke.getKeyCode();
         switch(c){
             case KeyEvent.VK_LEFT:
-                System.out.println("Left");
-                me.setSpeedX(0);
+                //System.out.println("Left");
+                //me.setSpeedX(0);
+                me.moveLeft(false);
                 break;
             case KeyEvent.VK_RIGHT:
-                System.out.println("Right");
-                me.setSpeedX(0);
+                //System.out.println("Right");
+                //me.setSpeedX(0);
+                me.moveRight(false);
                 break;
             case KeyEvent.VK_UP:
-                System.out.println("Up");
+                me.keyUp = false;
+                break;
+            case KeyEvent.VK_G:
+                me.playerColor=Color.RED;
+                break;
+            case KeyEvent.VK_H:
+                me.playerColor=Color.BLUE;
+                break;
+            case KeyEvent.VK_J:
+                me.playerColor=Color.GREEN;
                 break;
             default:
                 System.out.println("Key not implemented");

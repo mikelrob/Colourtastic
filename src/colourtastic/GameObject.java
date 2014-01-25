@@ -1,6 +1,7 @@
 package colourtastic;
 
 import java.awt.Color;
+import java.awt.Rectangle;
 
 /*
  * To change this template, choose Tools | Templates
@@ -13,12 +14,13 @@ import java.awt.Color;
  */
 public abstract class GameObject {
     
+    protected Rectangle goRect;
     protected int sizeX, sizeY;
     protected int posX, posY;
     protected Color color;
     
     public GameObject(){
-        sizeX = sizeY = posX = posY = 0;
+        goRect =  new Rectangle(0,0,0,0);
         color = Color.WHITE;
     }
     
@@ -29,27 +31,19 @@ public abstract class GameObject {
     public abstract void update();
     
     public int getSizeX(){
-        return sizeX;
+        return goRect.width;
     }
     
     public int getSizeY(){
-        return sizeY;
-    }
-    
-    public void setSizeX(int newX){
-        sizeX = newX;
-    }
-    
-    public void setSizeY(int newY){
-        sizeY = newY;
+        return goRect.height;
     }
     
     public int getPositionX(){
-        return posX;
+        return goRect.x;
     }
     
     public int getPositionY(){
-        return posY;
+        return goRect.y;
     }
     
     public void setPositionX(int newX){
