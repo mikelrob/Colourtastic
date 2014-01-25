@@ -13,14 +13,20 @@ import java.awt.Color;
  */
 public abstract class GameObject {
     
-    int sizeX, sizeY;
-    int posX, posY;
-    Color color;
+    protected int sizeX, sizeY;
+    protected int posX, posY;
+    protected Color color;
     
     public GameObject(){
         sizeX = sizeY = posX = posY = 0;
         color = Color.WHITE;
     }
+    
+    /**
+     * Abstract method use by game loop to tell game objects
+     * to ready themselves
+     */
+    public abstract void update();
     
     public int getSizeX(){
         return sizeX;

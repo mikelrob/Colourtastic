@@ -36,10 +36,10 @@ public class GameView extends JPanel implements ActionListener, KeyListener{
      * @param g
      */
     @Override
-    public void paintComponent(Graphics g){
+    public void paint(Graphics g){
         //fill back ground
         g.setColor(Color.BLACK);
-        g.fillRect(100, 100, 100, 100);
+        g.fillRect(0, 0, getWidth(), getHeight());
         
         //draw player
         g.setColor(me.getColor());
@@ -55,6 +55,7 @@ public class GameView extends JPanel implements ActionListener, KeyListener{
     public void actionPerformed(ActionEvent ae) {
 //        System.out.println(ae.getID());
 //        System.out.println(System.currentTimeMillis());
+        me.update();
         this.repaint();
     }
 
@@ -68,8 +69,18 @@ public class GameView extends JPanel implements ActionListener, KeyListener{
 //        System.out.println(ke.getKeyChar() + " pressed");
         int c = ke.getKeyCode();
         switch(c){
-            case KeyEvent.VK_A:
-                System.out.println("A");
+            case KeyEvent.VK_LEFT:
+                System.out.println("Left");
+                me.setSpeedX(-10);
+                break;
+            case KeyEvent.VK_RIGHT:
+                System.out.println("Right");
+                me.setSpeedX(10);
+//                me.setPositionX(me.getPositionX() + 10);
+                break;
+            case KeyEvent.VK_UP:
+                System.out.println("Up");
+                me.jump();
                 break;
             default:
                 System.out.println("Key not implemented");
@@ -78,6 +89,21 @@ public class GameView extends JPanel implements ActionListener, KeyListener{
 
     @Override
     public void keyReleased(KeyEvent ke) {
-        System.out.println(ke.getKeyChar() + " released");
+        int c = ke.getKeyCode();
+        switch(c){
+            case KeyEvent.VK_LEFT:
+                System.out.println("Left");
+                me.setSpeedX(0);
+                break;
+            case KeyEvent.VK_RIGHT:
+                System.out.println("Right");
+                me.setSpeedX(0);
+                break;
+            case KeyEvent.VK_UP:
+                System.out.println("Up");
+                break;
+            default:
+                System.out.println("Key not implemented");
+        }
     }
 }

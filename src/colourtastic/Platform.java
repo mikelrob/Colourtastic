@@ -10,4 +10,8 @@ package colourtastic;
  */
 public class Platform extends GameObject{
     
+    @Override
+    public void update(){
+        
+    }
 }
